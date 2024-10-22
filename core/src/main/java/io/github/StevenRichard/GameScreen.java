@@ -53,10 +53,6 @@ public class GameScreen implements Screen {
 
         batch = new SpriteBatch();
         boardSprite = new Sprite(new Texture("board.png"));
-        whiteChip = new Sprite(new Texture("white.png"));
-        whiteChip.setPosition(Gdx.graphics.getWidth()/2-250, Gdx.graphics.getHeight()/2+250);
-        blackChip = new Sprite(new Texture("black.png"));
-        blackChip.setPosition(Gdx.graphics.getWidth()/2+200, Gdx.graphics.getHeight()/2+250);
         arrowSelect = new Sprite(new Texture("arrow.png"));
         arrowSelect.rotate(270);
         arrowRec= new Rectangle();
@@ -99,7 +95,7 @@ public class GameScreen implements Screen {
         playerTurn = true;
         win = false;
         minimax = new MiniMax();
-        gameOverScreen = new GameOverScreen(game);
+
 
     }
 
@@ -130,17 +126,15 @@ public class GameScreen implements Screen {
             s.draw(batch);
         }
         boardSprite.draw(batch);
-        whiteChip.draw(batch);
-        blackChip.draw(batch);
         arrowSelect.draw(batch);
         batch.end();
 
         win = checkWinningMove("W");
         if(win)
-            gameOver();
+            gameOver("W");
         win = checkWinningMove("B");
         if(win)
-            gameOver();
+            gameOver("B");
 
     }
 
@@ -150,12 +144,7 @@ public class GameScreen implements Screen {
                 if(board[i][0].isEmpty()) {
                     board[i][0] = "W";
                     Sprite chip = new Sprite(new Texture("white.png"));
-                    if(i == 0) {
-                        chip.setPosition(30, i + 12);
-                    }
-                    else{
-                        chip.setPosition(30, (i*80) + 12);
-                    }
+                    chip.setPosition(30, (i*80) + 12);
                     playerPieces.add(chip);
                     break;
                 }
@@ -166,12 +155,7 @@ public class GameScreen implements Screen {
                 if(board[i][1].isEmpty()) {
                     board[i][1] = "W";
                     Sprite chip = new Sprite(new Texture("white.png"));
-                    if(i == 0) {
-                        chip.setPosition(140, i + 12);
-                    }
-                    else{
-                        chip.setPosition(140, (i*80) + 12);
-                    }
+                    chip.setPosition(140, (i*80) + 12);
                     playerPieces.add(chip);
                     break;
                 }
@@ -182,12 +166,7 @@ public class GameScreen implements Screen {
                 if(board[i][2].isEmpty()) {
                     board[i][2] = "W";
                     Sprite chip = new Sprite(new Texture("white.png"));
-                    if(i == 0) {
-                        chip.setPosition(250, i + 12);
-                    }
-                    else{
-                        chip.setPosition(250, (i*80) + 12);
-                    }
+                    chip.setPosition(250, (i*80) + 12);
                     playerPieces.add(chip);
                     break;
                 }
@@ -198,12 +177,7 @@ public class GameScreen implements Screen {
                 if(board[i][3].isEmpty()) {
                     board[i][3] = "W";
                     Sprite chip = new Sprite(new Texture("white.png"));
-                    if(i == 0) {
-                        chip.setPosition(360, i + 12);
-                    }
-                    else{
-                        chip.setPosition(360, (i*80) + 12);
-                    }
+                    chip.setPosition(360, (i*80) + 12);
                     playerPieces.add(chip);
                     break;
                 }
@@ -214,12 +188,7 @@ public class GameScreen implements Screen {
                 if(board[i][4].isEmpty()) {
                     board[i][4] = "W";
                     Sprite chip = new Sprite(new Texture("white.png"));
-                    if(i == 0) {
-                        chip.setPosition(470, i + 12);
-                    }
-                    else{
-                        chip.setPosition(470, (i*80) + 12);
-                    }
+                    chip.setPosition(470, (i*80) + 12);
                     playerPieces.add(chip);
                     break;
                 }
@@ -230,12 +199,7 @@ public class GameScreen implements Screen {
                 if(board[i][5].isEmpty()) {
                     board[i][5] = "W";
                     Sprite chip = new Sprite(new Texture("white.png"));
-                    if(i == 0) {
-                        chip.setPosition(580, i + 12);
-                    }
-                    else{
-                        chip.setPosition(580, (i*80) + 12);
-                    }
+                    chip.setPosition(580, (i*80) + 12);
                     playerPieces.add(chip);
                     break;
                 }
@@ -246,12 +210,7 @@ public class GameScreen implements Screen {
                 if(board[i][6].isEmpty()) {
                     board[i][6] = "W";
                     Sprite chip = new Sprite(new Texture("white.png"));
-                    if(i == 0) {
-                        chip.setPosition(690, i + 12);
-                    }
-                    else{
-                        chip.setPosition(690, (i*80) + 12);
-                    }
+                    chip.setPosition(690, (i*80) + 12);
                     playerPieces.add(chip);
                     break;
                 }
@@ -266,12 +225,7 @@ public class GameScreen implements Screen {
                 if(board[i][0].isEmpty()) {
                     board[i][0] = "B";
                     Sprite chip = new Sprite(new Texture("black.png"));
-                    if(i == 0) {
-                        chip.setPosition(30, i + 12);
-                    }
-                    else{
-                        chip.setPosition(30, (i*80) + 12);
-                    }
+                    chip.setPosition(30, (i*80) + 12);
                     compPieces.add(chip);
                     break;
                 }
@@ -282,12 +236,7 @@ public class GameScreen implements Screen {
                 if(board[i][1].isEmpty()) {
                     board[i][1] = "B";
                     Sprite chip = new Sprite(new Texture("black.png"));
-                    if(i == 0) {
-                        chip.setPosition(140, i + 12);
-                    }
-                    else{
-                        chip.setPosition(140, (i*80) + 12);
-                    }
+                    chip.setPosition(140, (i*80) + 12);
                     compPieces.add(chip);
                     break;
                 }
@@ -298,12 +247,7 @@ public class GameScreen implements Screen {
                 if(board[i][2].isEmpty()) {
                     board[i][2] = "B";
                     Sprite chip = new Sprite(new Texture("black.png"));
-                    if(i == 0) {
-                        chip.setPosition(250, i + 12);
-                    }
-                    else{
-                        chip.setPosition(250, (i*80) + 12);
-                    }
+                    chip.setPosition(250, (i*80) + 12);
                     compPieces.add(chip);
                     break;
                 }
@@ -314,12 +258,7 @@ public class GameScreen implements Screen {
                 if(board[i][3].isEmpty()) {
                     board[i][3] = "B";
                     Sprite chip = new Sprite(new Texture("black.png"));
-                    if(i == 0) {
-                        chip.setPosition(360, i + 12);
-                    }
-                    else{
-                        chip.setPosition(360, (i*80) + 12);
-                    }
+                    chip.setPosition(360, (i*80) + 12);
                     compPieces.add(chip);
                     break;
                 }
@@ -330,12 +269,7 @@ public class GameScreen implements Screen {
                 if(board[i][4].isEmpty()) {
                     board[i][4] = "B";
                     Sprite chip = new Sprite(new Texture("black.png"));
-                    if(i == 0) {
-                        chip.setPosition(470, i + 12);
-                    }
-                    else{
-                        chip.setPosition(470, (i*80) + 12);
-                    }
+                    chip.setPosition(470, (i*80) + 12);
                     compPieces.add(chip);
                     break;
                 }
@@ -346,12 +280,7 @@ public class GameScreen implements Screen {
                 if(board[i][5].isEmpty()) {
                     board[i][5] = "B";
                     Sprite chip = new Sprite(new Texture("black.png"));
-                    if(i == 0) {
-                        chip.setPosition(580, i + 12);
-                    }
-                    else{
-                        chip.setPosition(580, (i*80) + 12);
-                    }
+                    chip.setPosition(580, (i*80) + 12);
                     compPieces.add(chip);
                     break;
                 }
@@ -362,12 +291,7 @@ public class GameScreen implements Screen {
                 if(board[i][6].isEmpty()) {
                     board[i][6] = "B";
                     Sprite chip = new Sprite(new Texture("black.png"));
-                    if(i == 0) {
-                        chip.setPosition(690, i + 12);
-                    }
-                    else{
-                        chip.setPosition(690, (i*80) + 12);
-                    }
+                    chip.setPosition(690, (i*80) + 12);
                     compPieces.add(chip);
                     break;
                 }
@@ -407,7 +331,8 @@ public class GameScreen implements Screen {
         return false;
     }
 
-    private void gameOver() {
+    private void gameOver(String winner) {
+        gameOverScreen = new GameOverScreen(game, winner);
         game.setScreen(gameOverScreen);
     }
 

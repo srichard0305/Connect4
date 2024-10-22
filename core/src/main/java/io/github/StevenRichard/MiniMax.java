@@ -42,25 +42,32 @@ public class MiniMax {
         boolean aiPlayerWin = checkWinningMove(board, aiPlayer);
 
         // if reached the max depth or the player wins or the ai wins
-        if(depth == 3 || playerWin || aiPlayerWin){
-            if(depth == 3) {
-                currentNode.cost = evaluateBoard(board);
-                return currentNode;
-            }
-            if(playerWin){
-                currentNode.cost = Integer.MIN_VALUE;
-                return currentNode;
-            }
-            if(aiPlayerWin){
-                currentNode.cost = Integer.MAX_VALUE;
-                return currentNode;
-            }
+        if(depth == 3) {
+            currentNode.cost = evaluateBoard(board);
+            return currentNode;
         }
+        if(playerWin){
+            currentNode.cost = Integer.MIN_VALUE;
+            Gdx.app.log("", "Player Win");
+            return currentNode;
+        }
+        if(aiPlayerWin){
+            currentNode.cost = Integer.MAX_VALUE;
+            return currentNode;
+        }
+
 
         // get the valid locations
         ArrayList<Node> validLocations = getValidLocations(board);
 
+        //check if no more valid locations
+        if(validLocations.isEmpty()) {
+            currentNode.cost = 0;
+            return currentNode;
+        }
+
         Node bestChoice;
+
         // ai players turn
         if(maximizing){
             int value = Integer.MIN_VALUE;
@@ -127,7 +134,7 @@ public class MiniMax {
 
     // evaluation function to determine who has the more strategic win
     private int evaluateBoard(String [][] board){
-        int utility = 138;
+        int utility = 128;
         int sum = 0;
         for(int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
@@ -135,10 +142,10 @@ public class MiniMax {
                     sum -= evalBoard[i][j];
                 else if(board[i][j].equals(aiPlayer))
                     sum += evalBoard[i][j];
+
             }
         }
-
-        return sum + utility;
+        return utility + sum;
     }
 
     // get valid locations that the player can drop a piece

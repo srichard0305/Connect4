@@ -17,7 +17,7 @@ public class GameOverScreen implements Screen {
     Game game;
     Viewport viewport;
     Stage stage;
-    public GameOverScreen(Game game){
+    public GameOverScreen(Game game, String piece){
 
         this.game = game;
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
