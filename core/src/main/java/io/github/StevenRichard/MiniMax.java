@@ -48,7 +48,6 @@ public class MiniMax {
         }
         if(playerWin){
             currentNode.cost = Integer.MIN_VALUE;
-            Gdx.app.log("", "Player Win");
             return currentNode;
         }
         if(aiPlayerWin){
@@ -134,27 +133,28 @@ public class MiniMax {
 
     // evaluation function to determine who has the more strategic win
     private int evaluateBoard(String [][] board){
-        int utility = 128;
-        int sum = 0;
+        int  aiScore= 0;
+        int playerScore = 0;
         for(int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
                 if(board[i][j].equals(player))
-                    sum -= evalBoard[i][j];
+                   playerScore += evalBoard[i][j];
                 else if(board[i][j].equals(aiPlayer))
-                    sum += evalBoard[i][j];
+                    aiScore += evalBoard[i][j];
 
             }
         }
-        return utility + sum;
+        return aiScore - playerScore;
     }
 
     // get valid locations that the player can drop a piece
     private ArrayList<Node> getValidLocations(String [][] board){
         ArrayList<Node> temp = new ArrayList<>();
-        for(int i = 0; i < ROW; i++){
-            for(int j = 0; j < COL; j++){
-                if(board[i][j].isEmpty()) {
-                    temp.add(new Node(i,j));
+        for(int i = 0; i < COL; i++){
+            for(int j = 0; j < ROW; j++){
+                if(board[j][i].isEmpty()) {
+                    temp.add(new Node(j,i));
+                    break;
                 }
             }
         }
