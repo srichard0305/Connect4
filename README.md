@@ -24,13 +24,16 @@ to run as well.
 ## Minimax Algorithm  
 
 The minimax algorithm makes use of some helper functions: 
-    • An evaluateBoard function to determine the value of each player depending on the state of 
-      the board. This only happens if the board is in a terminal state. The function will sum all 
-      values of each player’s piece that occupies a space on the board. The values are 
-      determined by the evaluation board that is created at instantiation.  
-    • getValidLocations function returns a list of all valid locations the player can drop a piece 
-      based on the current board state. 
-    • checkWinningMove function determines if the board is in a terminal state. 
+ 
+An evaluateBoard function to determine the value of each player depending on the state of 
+the board. This only happens if the board is in a terminal state. The function will sum all 
+values of each player’s piece that occupies a space on the board. The values are 
+determined by the evaluation board that is created at instantiation.  
+
+getValidLocations function returns a list of all valid locations the player can drop a piece 
+based on the current board state. 
+
+checkWinningMove function determines if the board is in a terminal state. 
 
 The main minimax algorithm works by maximizing the computer agents score while minimizing the 
 opponent’s score. The algorithm works to a maximum depth of 4 or to a terminal state to first start 
